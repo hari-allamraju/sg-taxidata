@@ -10,3 +10,7 @@
       file:
         path: /home/pi/taxidata
         state:  absent
+    - name: delete cron
+      cron:
+        name: "fetch data"
+        state:  absent

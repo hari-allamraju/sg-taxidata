@@ -13,3 +13,12 @@
       pip:
         name: requests, pandas
         virtualenv: /home/pi/taxidata
+    - name: checkout or update from git
+      git:
+        repo: 'https://github.com/hari-allamraju/sg-taxidata.git'
+        dest: /home/pi/taxidata
+    - name: setup cron
+      cron:
+        name: "fetch data"
+        minute: "/5"
+        job: "bash /home/pi/taxidata/sg-taxidata/run.sh"
