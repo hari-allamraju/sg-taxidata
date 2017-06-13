@@ -11,14 +11,19 @@
         name: virtualenv
     - name: create virtualenv
       pip:
-        name: requests, pandas
-        virtualenv: /home/pi/taxidata
+        #requirements will come later from git
+        name: pip
+        virtualenv: '/home/{{ ansible_user }}/taxidata'
     - name: checkout or update from git
       git:
         repo: 'https://github.com/hari-allamraju/sg-taxidata.git'
-        dest: /home/pi/taxidata
+        dest: '/home/{{ ansible_user}}/taxidata/sg-taxidata'
+    - name: install requirements
+      pip:
+        requirements: '/home/{{ ansible_user }}/taxidata/sg-taxidata/requirements.txt'
     - name: setup cron
       cron:
+        user: '{{ ansible_user }}'
         name: "fetch data"
         minute: "/5"
-        job: "bash /home/pi/taxidata/sg-taxidata/run.sh"
+        job: 'bash /home/{{ ansible_user }}/taxidata/sg-taxidata/run.sh'

@@ -1,3 +1,3 @@
-source /home/pi/taxidata/bin/activate
-cd /home/pi/taxidata/sg-taxidata
+source ~/taxidata/bin/activate
+cd ~/taxidata/sg-taxidata
 python fetch_to_file.py

@@ -8,9 +8,10 @@
         state:  absent
     - name: delete virtualenv
       file:
-        path: /home/pi/taxidata
+        path: /home/{{ ansible_user }}/taxidata
         state:  absent
     - name: delete cron
       cron:
+        user: '{{ ansible_user }}'
         name: "fetch data"
         state:  absent
