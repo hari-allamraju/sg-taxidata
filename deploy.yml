@@ -1,0 +1,15 @@
+---
+- hosts:  '{{ target }}'
+  become: True
+  tasks:
+    - name: install python dev if needed
+      apt:
+        name: python-dev
+        state:  present
+    - name: install virtualenv if needed
+      pip:
+        name: virtualenv
+    - name: create virtualenv
+      pip:
+        name: requests, pandas
+        virtualenv: /home/pi/taxidata

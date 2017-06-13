@@ -1,0 +1,12 @@
+---
+- hosts:  '{{ target }}'
+  become:  True
+  tasks:
+    - name: uninstall virtualenv if needed
+      pip:
+        name: virtualenv
+        state:  absent
+    - name: delete virtualenv
+      file:
+        path: /home/pi/taxidata
+        state:  absent
