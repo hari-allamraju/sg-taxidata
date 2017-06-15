@@ -1,11 +1,6 @@
 import json
-
-#Singapore bounds as taken from Google maps - includes From Tuas to Changi and 
-#from Sentosa to Woodlands
-min_lat=1.237831
-max_lat=1.470989
-min_lon=103.605713
-max_lon=104.043019
+import os
+from constants import *
 
 def read_json(filename):
 	with open(filename,"r") as f:
@@ -37,3 +32,11 @@ def get_rankings(grid):
 		for (index, value) in enumerated
 	}
 	return rankings
+
+def list_data_files(root):
+	result=[]
+	for root, dirs, files in os.walk(root):
+		if len(files) > 0 and FILENAME in files:
+			date,time = root.split("/")[1:]
+			result.append((root+"/"+FILENAME,date,time))
+	return result
