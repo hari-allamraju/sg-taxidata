@@ -1,12 +1,13 @@
 ---
 - hosts:  '{{ target }}'
-  become: True
   tasks:
     - name: install python dev if needed
+      become: True
       apt:
         name: python-dev
         state:  present
     - name: install virtualenv if needed
+      become: True
       pip:
         name: virtualenv
     - name: create virtualenv
@@ -20,7 +21,8 @@
         dest: '/home/{{ ansible_user}}/taxidata/sg-taxidata'
     - name: install requirements
       pip:
-        requirements: '/home/{{ ansible_user }}/taxidata/sg-taxidata/requirements.txt'
+        name: requests pandas
+        virtualenv: '/home/{{ ansible_user }}/taxidata'
     - name: setup cron
       cron:
         user: '{{ ansible_user }}'

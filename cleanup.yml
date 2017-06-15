@@ -1,8 +1,8 @@
 ---
 - hosts:  '{{ target }}'
-  become:  True
   tasks:
     - name: uninstall virtualenv if needed
+      become: True
       pip:
         name: virtualenv
         state:  absent
