@@ -21,8 +21,10 @@
         dest: '/home/{{ ansible_user}}/taxidata/sg-taxidata'
     - name: install requirements
       pip:
-        name: requests pandas
+        name: sg-taxidata/requirements.txt
         virtualenv: '/home/{{ ansible_user }}/taxidata'
+        async: 60
+        poll: 60
     - name: setup cron
       cron:
         user: '{{ ansible_user }}'
