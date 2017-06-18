@@ -72,4 +72,12 @@ def load_to_db(dbname,directory,grid_height=20):
 	db.commit()
 	db.close()
 
+def fetch_from_db(dbname,sql,f):
+	result=[]
+	db=sqlite3.connect(dbname)
+	res=db.execute(sql)
+	for r in res.fetchall():
+		result.append(f(r))
+	return result
+
 
