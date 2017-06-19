@@ -7,3 +7,5 @@ The data is updated every 30 seconds and the recommended usage is to invoke the 
 
 ## Data processing
 We assume the bounds of Singapore as lat and long bounds from Google Maps and for a given grid height, we calculate the width and map all the locations of the taxos to the grid. This data is then stored to SQLite DB in the form of Date-Time-X-Y-Value.
+
+We can fetch the data for any date, time or both and we can use that to analyze the availability for that grid.
