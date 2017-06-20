@@ -68,16 +68,26 @@ def load_to_db(dbname,directory,grid_height=20):
 	for date, time, grid in data:
 		for i in range(grid_height+1):
 			for j in range(grid_width+1):
-				db.execute(TABLE_INSERT_QUERY%(date,time,i,j,grid[i][j]))
+				db.execute(TABLE_INSERT_QUERY,(date,time,i,j,grid[i][j]))
 	db.commit()
 	db.close()
 
-def fetch_from_db(dbname,sql,f):
+def fetch_from_db(dbname,sql,params):
 	result=[]
 	db=sqlite3.connect(dbname)
-	res=db.execute(sql)
+	res=db.execute(sql,params)
 	for r in res.fetchall():
-		result.append(f(r))
+		result.append(r)
 	return result
+
+def fetch_by_date(dbname,date):
+	return fetch_from_db(dbname,BY_DATE_QUERY,(date,))
+
+def fetch_by_time(dbname,time):
+	return fetch_from_db(dbname,BY_TIME_QUERY,(time,))
+
+def fetch_by_date_and_time(dbname,date,time):
+	return fetch_from_db(dbname,BY_DATE_AND_TIME_QUERY,(date,time))
+
 
 

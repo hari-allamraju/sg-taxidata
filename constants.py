@@ -5,11 +5,11 @@ DATE='%Y%m%d'
 
 
 #SQL for the database
-TABLE_CREATE_QUERY='create table if not exists taxis (id integer primary key autoincrement,date text, time text,x integer, y integer,value integer)'
-TABLE_INSERT_QUERY='insert into taxis (date,time,x,y,value) values (%s,%s,%d,%d,%d)'
-BY_DATE_QUERY='select time,x,y,value from taxis where date=%s'
-BY_DATE_AND_TIME_QUERY='select x,y,value from taxis where date=%s and time=%s'
-BY_TIME_QUERY='select date,x,y,value from taxis where time=%s'
+TABLE_CREATE_QUERY='create table if not exists taxis (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,value INTEGER)'
+TABLE_INSERT_QUERY='insert into taxis (date,time,x,y,value) values (?,?,?,?,?)'
+BY_DATE_QUERY='select time,x,y,value from taxis where date=?'
+BY_DATE_AND_TIME_QUERY='select x,y,value from taxis where date=? and time=?'
+BY_TIME_QUERY='select date,x,y,value from taxis where time=?'
 
 
 #map details
