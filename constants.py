@@ -1,5 +1,5 @@
 #File storage
-FILENAME='data.json'
+FILENAME='taxi.json'
 TSTAMP='%Y-%m-%dT%H:%M:%S%z'
 DATE='%Y%m%d'
 
