@@ -1,8 +1,15 @@
 #File storage
-FILENAME='taxi.json'
+TAXI_FILENAME='taxi.json'
+TWO_HOUR_FILENAME='twohour.json'
+HEAVY_RAIN_FILENAME='heavyrain.json'
+PSI_FILENAME='psi.json'
 TSTAMP='%Y-%m-%dT%H:%M:%S%z'
 DATE='%Y%m%d'
 
+#weather
+TWO_HOUR="http://api.nea.gov.sg/api/WebAPI/?dataset=2hr_nowcast&keyref="
+HEAVY_RAIN="http://api.nea.gov.sg/api/WebAPI/?dataset=heavy_rain_warning&keyref="
+PSI="http://api.nea.gov.sg/api/WebAPI/?dataset=psi_update&keyref="
 
 #SQL for the database
 TABLE_CREATE_QUERY='create table if not exists taxis (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,value INTEGER)'

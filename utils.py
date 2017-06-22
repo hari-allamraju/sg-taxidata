@@ -1,7 +1,19 @@
 import json
 import os
 import sqlite3
+import datetime
 from constants import *
+
+def create_data_folder():
+	now=datetime.datetime.now()
+	tstamp=now.strftime(TSTAMP)
+	path="data/"+now.strftime(DATE)+"/"+now.strftime('%H')+"{0:0>2}".format(int(5 * round(float(now.minute)/5)))
+
+	if not os.path.exists(path):
+		os.makedirs(path)
+
+	return path
+
 
 def read_json(filename):
 	with open(filename,"r") as f:
