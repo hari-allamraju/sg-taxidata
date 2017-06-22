@@ -1,11 +1,6 @@
 ---
 - hosts:  '{{ target }}'
   tasks:
-    - name: uninstall virtualenv if needed
-      become: True
-      pip:
-        name: virtualenv
-        state:  absent
     - name: delete virtualenv
       file:
         path: /home/{{ ansible_user }}/taxidata

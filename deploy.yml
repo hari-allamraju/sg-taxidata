@@ -10,24 +10,28 @@
       become: True
       pip:
         name: virtualenv
+    - name: install requests if needed
+      become: True
+      pip:
+        name: requests
+    - name: install pandas if needed
+      become: True
+      apt:
+        name: python-pandas
+        state:  present
     - name: create virtualenv
       pip:
         #requirements will come later from git
         name: pip
         virtualenv: '/home/{{ ansible_user }}/taxidata'
+        virtualenv_site_packages: yes
     - name: checkout or update from git
       git:
         repo: 'https://github.com/hari-allamraju/sg-taxidata.git'
         dest: '/home/{{ ansible_user}}/taxidata/sg-taxidata'
-    - name: install requirements
-      pip:
-        chdir:  '/home/{{ ansible_user }}/taxidata/sg-taxidata'
-        name: requests pandas pytest
-        virtualenv: '/home/{{ ansible_user }}/taxidata'
-        extra_args: '--exists-action=w'
     - name: setup cron
       cron:
         user: '{{ ansible_user }}'
         name: "fetch data"
-        minute: "/5"
+        minute: "*/5"
         job: 'bash /home/{{ ansible_user }}/taxidata/sg-taxidata/run.sh'
