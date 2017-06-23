@@ -35,3 +35,9 @@
         name: "fetch data"
         minute: "*/5"
         job: 'bash /home/{{ ansible_user }}/taxidata/sg-taxidata/run.sh'
+    - name: setup weather cron
+      cron:
+        user: '{{ ansible_user }}'
+        name: "fetch weather data"
+        minute: "*/5"
+        job: 'bash /home/{{ ansible_user }}/taxidata/sg-taxidata/run_weather.sh'
