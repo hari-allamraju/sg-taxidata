@@ -10,10 +10,10 @@
       become: True
       pip:
         name: virtualenv
-    - name: install requests if needed
+    - name: install packages
       become: True
       pip:
-        name: requests
+        name: requests xmljson
     - name: install pandas if needed
       become: True
       apt:
