@@ -36,7 +36,7 @@ if __name__=="__main__":
 	if len(sys.argv) < 2:
 		print "Usage: python simple_visual.py <data file name>"
 		sys.exit(1)
-	h=20
+	h=25
 	grid=create_grid(h)
 	data=read_json(sys.argv[1])
 	points=data['features'][0]['geometry']['coordinates']

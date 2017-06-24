@@ -66,42 +66,29 @@ def get_rankings(grid):
 	return rankings
 
 def file_to_grid(filename,grid_height=20):
-	grid_width=get_width(grid_height)
-	grid=create_grid(grid_width,grid_height)
+	grid=create_grid(grid_height)
 	data=read_json(filename)
 	for lon,lat in data['features'][0]['geometry']['coordinates']:
-		x,y = get_grid_cell(lat,lon,grid_width,grid_height)
+		x,y = get_grid_cell(lat,lon,grid_height)
 		grid[y][x]+=1
 	return grid
 
 
-def list_data_files(root):
+def list_data_files(root,filename):
 	result=[]
 	for root, dirs, files in os.walk(root):
-		if len(files) > 0 and FILENAME in files:
+		if len(files) > 0 and filename in files:
 			date,time = root.split("/")[1:]
-			result.append((root+"/"+FILENAME,date,time))
+			result.append((root+"/"+filename,date,time))
 	return result
 
-def process_data(directory,grid_height=20):
+def process_data(directory,filename,grid_height=20):
 	result=[]
-	files = list_data_files(directory)
-	for filename, date, time in files:
-		grid=file_to_grid(filename,grid_height)
+	files = list_data_files(directory,filename)
+	for file, date, time in files:
+		grid=file_to_grid(file,grid_height)
 		result.append((date,time,grid))
 	return result
-
-def load_taxi_to_db(dbname,directory,grid_height=20):
-	db=sqlite3.connect(dbname)
-	db.execute(TAXI_TABLE_CREATE_QUERY)
-	data=process_data(directory,grid_height)
-	grid_width=get_width(grid_height)
-	for date, time, grid in data:
-		for i in range(grid_height+1):
-			for j in range(grid_width+1):
-				db.execute(TAXI_TABLE_INSERT_QUERY,(date,time,i,j,grid[i][j]))
-	db.commit()
-	db.close()
 
 def fetch_from_db(dbname,sql,params):
 	result=[]
@@ -110,25 +97,5 @@ def fetch_from_db(dbname,sql,params):
 	for r in res.fetchall():
 		result.append(r)
 	return result
-
-def fetch_grid_by_date(dbname,date):
-	return fetch_from_db(dbname,TAXI_BY_DATE_QUERY,(date,))
-
-def fetch_grid_by_time(dbname,time):
-	return fetch_from_db(dbname,TAXI_BY_TIME_QUERY,(time,))
-
-def fetch_grid_by_date_and_time(dbname,date,time):
-	return fetch_from_db(dbname,TAXI_BY_DATE_AND_TIME_QUERY,(date,time))
-
-def fetch_loc_by_date(dbname,date,lat,lon):
-
-	return fetch_from_db(dbname,TAXI_BY_DATE_QUERY,(date,x,y))
-
-def fetch_loc_by_time(dbname,time):
-	return fetch_from_db(dbname,TAXI_BY_TIME_QUERY,(time,x,y))
-
-def fetch_loc_by_date_and_time(dbname,date,time):
-	return fetch_from_db(dbname,TAXI_BY_DATE_AND_TIME_QUERY,(date,time,x,y))
-
 
 

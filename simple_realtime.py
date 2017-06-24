@@ -33,7 +33,7 @@ def display_grid(grid):
 
 
 if __name__=="__main__":
-	h=20
+	h=25
 	grid=create_grid(h)
 	data=get_taxi_data()
 	points=data['features'][0]['geometry']['coordinates']

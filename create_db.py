@@ -1,6 +1,6 @@
 import sys
 
-from utils import *
+from taxis import load_taxi_to_db
 
 if __name__=="__main__":
 	if len(sys.argv) < 4:
