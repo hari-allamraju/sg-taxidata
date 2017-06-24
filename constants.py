@@ -12,11 +12,17 @@ HEAVY_RAIN="http://api.nea.gov.sg/api/WebAPI/?dataset=heavy_rain_warning&keyref=
 PSI="http://api.nea.gov.sg/api/WebAPI/?dataset=psi_update&keyref="
 
 #SQL for the database
-TABLE_CREATE_QUERY='create table if not exists taxis (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,value INTEGER)'
-TABLE_INSERT_QUERY='insert into taxis (date,time,x,y,value) values (?,?,?,?,?)'
-BY_DATE_QUERY='select time,x,y,value from taxis where date=?'
-BY_DATE_AND_TIME_QUERY='select x,y,value from taxis where date=? and time=?'
-BY_TIME_QUERY='select date,x,y,value from taxis where time=?'
+#taxi
+TAXI_TABLE_CREATE_QUERY='create table if not exists taxis (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,value INTEGER)'
+TAXI_TABLE_INSERT_QUERY='insert into taxis (date,time,x,y,value) values (?,?,?,?,?)'
+TAXI_BY_DATE_QUERY='select time,x,y,value from taxis where date=?'
+TAXI_BY_DATE_AND_TIME_QUERY='select x,y,value from taxis where date=? and time=?'
+TAXI_BY_TIME_QUERY='select date,x,y,value from taxis where time=?'
+TAXI_BY_DATE_QUERY_XY='select time,x,y,value from taxis where date=? and x=? and y=?'
+TAXI_BY_DATE_AND_TIME_QUERY_XY='select x,y,value from taxis where date=? and time=? and x=? and y=?'
+TAXI_BY_TIME_QUERY_XY='select date,x,y,value from taxis where time=? and x=? and y=?'
+#weather
+TWO_HOUR_TABLE_CREATE_QUERY='create table if not exists twohour (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,value INTEGER,forecast TEXT,location TEXT)'
 
 
 #map details

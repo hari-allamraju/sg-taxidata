@@ -33,12 +33,9 @@ def display_grid(grid):
 
 
 if __name__=="__main__":
-	if len(sys.argv) < 2:
-		print "Usage: python simple_visual.py <data file name>"
-		sys.exit(1)
 	h=20
 	grid=create_grid(h)
-	data=read_json(sys.argv[1])
+	data=get_taxi_data()
 	points=data['features'][0]['geometry']['coordinates']
 	for lon,lat in points:
 		x,y=get_grid_cell(lat,lon,h)

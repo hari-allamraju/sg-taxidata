@@ -10,4 +10,4 @@ if __name__=="__main__":
 	dbname=sys.argv[2]
 	height=int(sys.argv[3])
 
-	load_to_db(dbname,directory,height)
+	load_taxi_to_db(dbname,directory,height)
