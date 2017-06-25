@@ -39,9 +39,9 @@ def read_json(filename):
 def get_width(h):
 	return int(h * (max_lon - min_lon) / (max_lat - min_lat))
 
-def create_grid(h):
+def create_grid(h,value=0):
 	w = get_width(h)
-	grid = [[0] * (w+1) for i in range(h+1)]
+	grid = [[value] * (w+1) for i in range(h+1)]
 	return grid
 
 def get_grid_cell(lat,lon,h=20,w=None):
@@ -65,14 +65,6 @@ def get_rankings(grid):
 	}
 	return rankings
 
-def file_to_grid(filename,grid_height=20):
-	grid=create_grid(grid_height)
-	data=read_json(filename)
-	for lon,lat in data['features'][0]['geometry']['coordinates']:
-		x,y = get_grid_cell(lat,lon,grid_height)
-		grid[y][x]+=1
-	return grid
-
 
 def list_data_files(root,filename):
 	result=[]
@@ -82,11 +74,11 @@ def list_data_files(root,filename):
 			result.append((root+"/"+filename,date,time))
 	return result
 
-def process_data(directory,filename,grid_height=20):
+def process_data(directory,filename,f,grid_height=20):
 	result=[]
 	files = list_data_files(directory,filename)
 	for file, date, time in files:
-		grid=file_to_grid(file,grid_height)
+		grid=f(file,grid_height)
 		result.append((date,time,grid))
 	return result
 

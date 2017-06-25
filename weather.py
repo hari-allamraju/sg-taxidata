@@ -2,23 +2,31 @@ import sqlite3
 from utils import *
 from constants import *
 
+
 def file_to_grid(filename,grid_height=20):
-	grid=create_grid(grid_height)
+	grid=create_grid(grid_height,('-','-'))
 	data=read_json(filename)
-	for lon,lat in data['features'][0]['geometry']['coordinates']:
+	for d in data['channel']['item']['weatherForecast']['area']:
+		lat=d['@lat']
+		lon=d['@lon']
+		forecast=d['@forecast']
+		location=d['@name']
 		x,y = get_grid_cell(lat,lon,grid_height)
-		grid[y][x]+=1
+		grid[y][x]=(forecast,location)
 	return grid
 
-def load_taxi_to_db(dbname,directory,grid_height=20):
+
+def load_twohour_to_db(dbname,directory,grid_height=20):
 	db=sqlite3.connect(dbname)
-	db.execute(TAXI_TABLE_CREATE_QUERY)
-	data=process_data(directory,TAXI_FILENAME,file_to_grid,grid_height)
+	db.execute(TWO_HOUR_TABLE_CREATE_QUERY)
+	data=process_data(directory,TWO_HOUR_FILENAME,file_to_grid,grid_height)
 	grid_width=get_width(grid_height)
 	for date, time, grid in data:
 		for y in range(grid_height+1):
 			for x in range(grid_width+1):
-				db.execute(TAXI_TABLE_INSERT_QUERY,(date,time,x,y,grid[y][x]))
+				forecast,location=grid[y][x]
+				if not forecast=='-':
+					db.execute(TWO_HOUR_TABLE_INSERT_QUERY,(date,time,x,y,forecast,location))
 	db.commit()
 	db.close()
 
