@@ -40,14 +40,17 @@ def fetch_grid_by_date_and_time(dbname,date,time):
 	return fetch_from_db(dbname,TWO_HOUR_BY_DATE_AND_TIME_QUERY,(date,time))
 
 def fetch_loc_by_date(dbname,date,lat,lon,grid_height=20):
+	d=int(0.1*grid_height)
 	x,y=get_grid_cell(lat,lon,grid_height)
-	return fetch_from_db(dbname,TWO_HOUR_BY_DATE_QUERY_XY,(date,x,y))
+	return fetch_from_db(dbname,TWO_HOUR_BY_DATE_QUERY_XY,(date,x-d,x+d,y-d,y+d))
 
 def fetch_loc_by_time(dbname,time,lat,lon,grid_height=20):
+	d=int(0.1*grid_height)
 	x,y=get_grid_cell(lat,lon,grid_height)
-	return fetch_from_db(dbname,TWO_HOUR_BY_TIME_QUERY_XY,(time,x,y))
+	return fetch_from_db(dbname,TWO_HOUR_BY_TIME_QUERY_XY,(time,x-d,x+d,y-d,y+d))
 
 def fetch_loc_by_date_and_time(dbname,date,time,lat,lon,grid_height=20):
+	d=int(0.1*grid_height)
 	x,y=get_grid_cell(lat,lon,grid_height)
-	return fetch_from_db(dbname,TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY,(date,time,x,y))
+	return fetch_from_db(dbname,TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY,(date,time,x-d,x+d,y-d,y+d))
 

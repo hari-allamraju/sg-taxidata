@@ -28,9 +28,9 @@ TWO_HOUR_TABLE_INSERT_QUERY='insert into twohour (date,time,x,y,forecast,locatio
 TWO_HOUR_BY_DATE_QUERY='select time,x,y,forecast,location from twohour where date=?'
 TWO_HOUR_BY_DATE_AND_TIME_QUERY='select x,y,value,forecast,location from twohour where date=? and time=?'
 TWO_HOUR_BY_TIME_QUERY='select date,x,y,forecast,location from twohour where time=?'
-TWO_HOUR_BY_DATE_QUERY_XY='select time,x,y,forecast,location from twohour where date=? and x=? and y=?'
-TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY='select x,y,forecast,location from twohour where date=? and time=? and x=? and y=?'
-TWO_HOUR_BY_TIME_QUERY_XY='select date,x,y,forecast,location from twohour where time=? and x=? and y=?'
+TWO_HOUR_BY_DATE_QUERY_XY='select time,x,y,forecast,location from twohour where date=? and x between ? and ? and y between ? and ?'
+TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY='select x,y,forecast,location from twohour where date=? and time=? and x between ? and ? and y between ? and ?'
+TWO_HOUR_BY_TIME_QUERY_XY='select date,x,y,forecast,location from twohour where time=? and x between ? and ? and y between ? and ?'
 
 
 
