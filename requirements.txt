@@ -2,3 +2,5 @@ requests
 pandas
 pytest
 xmljson
+scikit-learn
+matplotlib
