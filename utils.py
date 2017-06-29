@@ -88,6 +88,7 @@ def fetch_from_db(dbname,sql,params):
 	res=db.execute(sql,params)
 	for r in res.fetchall():
 		result.append(r)
+	db.close()
 	return result
 
 
