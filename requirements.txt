@@ -3,4 +3,5 @@ pandas
 pytest
 xmljson
 scikit-learn
+scipy
 matplotlib
