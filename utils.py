@@ -6,6 +6,7 @@ import os
 import sqlite3
 import datetime
 from constants import *
+import pandas as pd
 
 def create_data_folder():
 	now=datetime.datetime.now()
@@ -90,5 +91,14 @@ def fetch_from_db(dbname,sql,params):
 		result.append(r)
 	db.close()
 	return result
+
+def getdf(data,cols,indexname):
+    df=pd.DataFrame(data)
+    df.columns=cols
+    df.index.name=indexname
+    df.reset_index(level=0, inplace=True)
+    return df
+
+
 
 
