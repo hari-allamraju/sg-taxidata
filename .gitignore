@@ -103,4 +103,6 @@ ENV/
 data/
 *.db
 *.tar
+*.tar.*
 *.tar.gz
+*.tar.gz.*
