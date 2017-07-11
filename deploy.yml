@@ -19,6 +19,11 @@
       apt:
         name: python-pandas
         state:  present
+    - name: install basemap
+      become: True
+      apt:
+        name: python-mpltoolkits.basemap
+        state:  present
     - name: create virtualenv
       pip:
         #requirements will come later from git

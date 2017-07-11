@@ -5,3 +5,4 @@ xmljson
 scikit-learn
 scipy
 matplotlib
+pyproj
