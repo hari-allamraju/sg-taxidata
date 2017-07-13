@@ -43,6 +43,10 @@ def fetch_loc_by_date_and_time(dbname,date,time,lat,lon,grid_height=20):
 	x,y=get_grid_cell(lat,lon,grid_height)
 	return fetch_from_db(dbname,TAXI_BY_DATE_AND_TIME_QUERY_XY,(date,time,x,y))
 
+def fetch_all_taxi_data(dbname,lat,lon,grid_height=20):
+	x,y=get_grid_cell(lat,lon,grid_height)
+	return fetch_from_db(dbname,ALL_TAXI_BY_XY,(x,y))
+
 def getdf_loc_time(dbname,time,lat,lon):
     data=fetch_loc_by_time(dbname,time,lat,lon)
     df=getdf(data,['Date','X','Y','TaxiCount'],'Point')
@@ -59,3 +63,8 @@ def getdf_loc_dates(dbname,dates,lat,lon):
     	data.extend(fetch_loc_by_date(dbname,date,lat,lon))
     df=getdf(data,['Time','X','Y','TaxiCount'],'Point')
     return df
+
+def get_df_all_taxi_data(dbname,lat,lon):
+	data=fetch_all_taxi_data(dbname,lat,lon)
+	df=getdf(data,['Date','Time','X','Y','TaxiCount'],'Point')
+	return df
