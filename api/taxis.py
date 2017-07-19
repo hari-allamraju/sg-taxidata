@@ -43,9 +43,12 @@ def fetch_loc_by_date_and_time(dbname,date,time,lat,lon,grid_height=20):
 	x,y=get_grid_cell(lat,lon,grid_height)
 	return fetch_from_db(dbname,TAXI_BY_DATE_AND_TIME_QUERY_XY,(date,time,x,y))
 
-def fetch_all_taxi_data(dbname,lat,lon,grid_height=20):
+def fetch_all_taxi_data_loc(dbname,lat,lon,grid_height=20):
 	x,y=get_grid_cell(lat,lon,grid_height)
 	return fetch_from_db(dbname,ALL_TAXI_BY_XY,(x,y))
+
+def fetch_all_taxi_data(dbname):
+	return fetch_from_db(dbname,ALL_TAXI,())
 
 def getdf_loc_time(dbname,time,lat,lon):
     data=fetch_loc_by_time(dbname,time,lat,lon)
@@ -57,6 +60,11 @@ def getdf_loc_date(dbname,date,lat,lon):
     df=getdf(data,['Time','X','Y','TaxiCount'],'Point')
     return df
 
+def getdf_date(dbname,date):
+    data=fetch_grid_by_date(dbname,date)
+    df=getdf(data,['Time','X','Y','TaxiCount'],'Point')
+    return df
+
 def getdf_loc_dates(dbname,dates,lat,lon):
     data=fetch_loc_by_date(dbname,dates[0],lat,lon)
     for date in dates[1:]:
@@ -64,7 +72,15 @@ def getdf_loc_dates(dbname,dates,lat,lon):
     df=getdf(data,['Time','X','Y','TaxiCount'],'Point')
     return df
 
-def get_df_all_taxi_data(dbname,lat,lon):
-	data=fetch_all_taxi_data(dbname,lat,lon)
+def get_df_all_taxi_data_loc(dbname,lat,lon):
+	data=fetch_all_taxi_data_loc(dbname,lat,lon)
 	df=getdf(data,['Date','Time','X','Y','TaxiCount'],'Point')
 	return df
+
+def get_df_all_taxi_data(dbname):
+	data=fetch_all_taxi_data(dbname)
+	df=getdf(data,['Date','Time','X','Y','TaxiCount'],'Point')
+	return df
+
+def get_dates(dbname):
+	return fetch_from_db(dbname,"select distinct date from taxis",())	

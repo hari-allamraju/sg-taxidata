@@ -3,7 +3,7 @@
 echo "Saving PYTHONPATH"
 ORIGINAL_PYTHONPATH=$PYTHONPATH
 echo "Prepending package to PYTHONPATH"
-export PYTHONPATH="$PWD/:$ORIGINAL_PYTHONPATH"
+export PYTHONPATH="$PWD/api/:$ORIGINAL_PYTHONPATH"
 echo "Starting Jupyter"
 jupyter notebook
 echo "Reverting to the original PYTHONPATH"

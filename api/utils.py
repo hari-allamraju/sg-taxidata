@@ -99,6 +99,3 @@ def getdf(data,cols,indexname):
     df.reset_index(level=0, inplace=True)
     return df
 
-
-
-
