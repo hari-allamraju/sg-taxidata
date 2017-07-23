@@ -28,7 +28,7 @@ TWO_HOUR_TABLE_CREATE_QUERY='create table if not exists twohour (id INTEGER prim
 HEAVY_RAIN_TABLE_CREATE_QUERY='create table if not exists heavyrain (id INTEGER primary ket autoincrement,date TEXT, time TEXT, warning TEXT'
 TWO_HOUR_TABLE_INSERT_QUERY='insert into twohour (date,time,x,y,forecast,location) values (?,?,?,?,?,?)'
 TWO_HOUR_BY_DATE_QUERY='select time,x,y,forecast,location from twohour where date=?'
-TWO_HOUR_BY_DATE_AND_TIME_QUERY='select x,y,value,forecast,location from twohour where date=? and time=?'
+TWO_HOUR_BY_DATE_AND_TIME_QUERY='select x,y,forecast,location from twohour where date=? and time=?'
 TWO_HOUR_BY_TIME_QUERY='select date,x,y,forecast,location from twohour where time=?'
 TWO_HOUR_BY_DATE_QUERY_XY='select time,x,y,forecast,location from twohour where date=? and x between ? and ? and y between ? and ?'
 TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY='select x,y,forecast,location from twohour where date=? and time=? and x between ? and ? and y between ? and ?'
