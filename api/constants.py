@@ -34,11 +34,16 @@ TWO_HOUR_BY_DATE_QUERY_XY='select time,x,y,forecast,location from twohour where 
 TWO_HOUR_BY_DATE_AND_TIME_QUERY_XY='select x,y,forecast,location from twohour where date=? and time=? and x between ? and ? and y between ? and ?'
 TWO_HOUR_BY_TIME_QUERY_XY='select date,x,y,forecast,location from twohour where time=? and x between ? and ? and y between ? and ?'
 
-#weather codes
-codes=enumerate(['BR','CL ','DR ','FA','FG ','FN ','FW ','HG ','HR ','HS','HT','HZ ','LH ','LR ','LS','OC ','PC','PN ','PS ','RA ','SH ','SK ','SN ','SR ','SS ','SU ','SW ','TL ','WC ','WD ','WF ','WR ','WS'])
 WEATHER_CODES={}
-for i,code in codes:
-	WEATHER_CODES[code.strip()]=i
+#bad
+for i in ['BR','CL','DR','FG','HG','HR','HS','HT','HZ','LH ','LR','LS']:
+	WEATHER_CODES[i]=0
+#good
+for i in ['FA','FN','FW','SU']:
+	WEATHER_CODES[i]=1
+#moderate
+for i in ['OC','PC','PN','PS','RA','SH','SK','SN','SR','SS','SW','TL','WC','WD','WF','WR','WS']:
+	WEATHER_CODES[i]=0.5
 
 #map details
 #Singapore bounds as taken from Google maps - includes From Tuas to Changi and 
