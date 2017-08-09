@@ -1,6 +1,6 @@
 source ~/taxidata/bin/activate
 cd ~/taxidata/sg-taxidata
 ORIGINAL_PYTHONPATH=$PYTHONPATH
-export PYTHONPATH="$PWD/api/:$ORIGINAL_PYTHONPATH"
+export PYTHONPATH="$PWD:$ORIGINAL_PYTHONPATH"
 echo $PYTHONPATH
-python api/fetch_to_file.py
+python sgtaxidata/fetch_to_file.py
