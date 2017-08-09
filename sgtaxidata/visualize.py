@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-plt.rcParams['figure.figsize'] = (20.0, 10.0)
-
 
 def plot_data(data):
 	ax=None
