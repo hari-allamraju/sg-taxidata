@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 def plot_data(data):
 	ax=None
@@ -17,27 +18,22 @@ def plot_model(X,y,model):
     plt.show()
 
 
-def plot_hist(x,y,mid1,mid2,xlabel,ylabel):
-	N, bins, patches = plt.hist(y,'auto')
+def plot_hist(d,xlabel,ylabel):
+	N, bins, patches = plt.hist(d,60,ec='k')
 
 	cmap = plt.get_cmap('jet')
 	low = cmap(0.5)
 	medium =cmap(0.25)
 	high = cmap(0.8)
-
-	print len(x), len(y), mid1,mid2
-	print range(0,mid1)
-	print range(mid1,mid2)
-	print range(mid2,len(x))
-	print len(patches)
-
-
-	for i in range(0,mid1):
-	    patches[i].set_facecolor(low)
-	for i in range(mid1,mid2):
-	    patches[i].set_facecolor(medium)
-	for i in range(mid2,len(x)):
-	    patches[i].set_facecolor(high)
+	l=len(patches)
+	
+	for i in range(l):
+		if i < 20:
+			patches[i].set_facecolor(low)
+		elif i < 40:
+			patches[i].set_facecolor(medium)
+		else:
+			patches[i].set_facecolor(high)
 
 	plt.xlabel(xlabel, fontsize=16)  
 	plt.ylabel(ylabel, fontsize=16)
