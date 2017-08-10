@@ -18,12 +18,18 @@ def plot_model(X,y,model):
 
 
 def plot_hist(x,y,mid1,mid2,xlabel,ylabel):
-	N, bins, patches = plt.hist(y, 30)
+	N, bins, patches = plt.hist(y,'auto')
 
 	cmap = plt.get_cmap('jet')
 	low = cmap(0.5)
 	medium =cmap(0.25)
 	high = cmap(0.8)
+
+	print len(x), len(y), mid1,mid2
+	print range(0,mid1)
+	print range(mid1,mid2)
+	print range(mid2,len(x))
+	print len(patches)
 
 
 	for i in range(0,mid1):
