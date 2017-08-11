@@ -19,7 +19,7 @@ def plot_model(X,y,model):
 
 
 def plot_hist(d,xlabel,ylabel):
-	N, bins, patches = plt.hist(d,60,ec='k')
+	N, bins, patches = plt.hist(d,100,ec='k')
 
 	cmap = plt.get_cmap('jet')
 	low = cmap(0.5)
@@ -30,7 +30,7 @@ def plot_hist(d,xlabel,ylabel):
 	for i in range(l):
 		if i < 20:
 			patches[i].set_facecolor(low)
-		elif i < 40:
+		elif i < 80:
 			patches[i].set_facecolor(medium)
 		else:
 			patches[i].set_facecolor(high)
