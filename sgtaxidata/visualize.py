@@ -18,19 +18,18 @@ def plot_model(X,y,model):
     plt.show()
 
 
-def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences"):
+def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
 	N, bins, patches = plt.hist(d,100,ec='k')
 
 	cmap = plt.get_cmap('jet')
 	low = cmap(0.5)
 	medium =cmap(0.25)
 	high = cmap(0.8)
-	l=len(patches)
 	
-	for i in range(l):
-		if i < 20:
+	for i in range(len(patches)):
+		if i < l:
 			patches[i].set_facecolor(low)
-		elif i < 80:
+		elif i < h:
 			patches[i].set_facecolor(medium)
 		else:
 			patches[i].set_facecolor(high)
@@ -45,7 +44,7 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences"):
 
 	#create legend
 	handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in [low,medium, high]]
-	labels= ["low","medium", "high"]
+	labels= ["lowest %s bins "%(l,),"between %s and %s bins "%(l,h), "highesr %s bins"%(h,)]
 	plt.legend(handles, labels)
 
 	plt.show()
