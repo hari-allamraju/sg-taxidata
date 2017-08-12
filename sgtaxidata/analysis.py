@@ -1,12 +1,5 @@
 import taxis
 from datetime import datetime
-import geocoder
-
-def get_lat_long(location):
-    g=geocoder.google(location)
-    if g.response.status_code == 200:
-        c=g.geojson['features'][0]['geometry']['coordinates']
-        return (c[1],c[0])
 
 def peak(h,m,w):
     return 1 if ((w==1 and (h>=6 and (h <=9 and m<30)) or (h >= 18))) else 0

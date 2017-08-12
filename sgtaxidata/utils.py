@@ -7,6 +7,7 @@ import sqlite3
 import datetime
 from constants import *
 import pandas as pd
+import geocoder
 
 def create_data_folder():
 	now=datetime.datetime.now()
@@ -99,3 +100,8 @@ def getdf(data,cols,indexname):
     df.reset_index(level=0, inplace=True)
     return df
 
+def get_lat_long(location):
+    g=geocoder.google(location)
+    if g.response.status_code == 200:
+        c=g.geojson['features'][0]['geometry']['coordinates']
+        return (c[1],c[0])

@@ -1,25 +1,49 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
+font = {'family': 'Times New Roman',
+        'color':  'darkred',
+        'weight': 'normal',
+        'size': 16,
+        }
+
 def plot_data(data):
-	ax=None
+	fig=plt.figure()
+	ax=fig.add_subplot(111)
+	ax.grid()
 	for x,y in data:
-		if ax:
-			ax=plt.plot(x,y)
-		else:
-			plt.plot(x,y,axes=ax)
+		ax=plt.plot(x,y)
 	plt.show()
 
 def plot_model(X,y,model):
-    plt.scatter(X, y,color='g')
-    plt.plot(X, model.predict(X),color='g')
+	plt.rcParams['figure.figsize'] = (12.0,12.0)
+	fig=plt.figure()
+	ax=fig.add_subplot(211)
+	ax.grid()
+	ax.plot(y,'-b')
+	P=model.predict(X)
+	ax.plot(P,'-g')
+	#create legend
+	handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in ['b','g']]
+	labels= ["Original Data","Predicted Data"]
+	ax.legend(handles, labels)
 
-    plt.scatter(X, y, color='r')
-    plt.show()
+	ax1=fig.add_subplot(212)
+	ax1.grid()
+	e=[a-b for a,b in zip(P,y)]
+	ax1.plot(e,'-r')
+    #create legend
+	handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in ['r']]
+	labels= ["Prediction Error"]
+	ax1.legend(handles, labels)
+	plt.show()
 
 
 def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
-	N, bins, patches = plt.hist(d,100,ec='k')
+	plt.rcParams['figure.figsize'] = (12.0,6.0)
+	fig=plt.figure()
+	ax=fig.add_subplot(111)
+	N, bins, patches = ax.hist(d,100,ec='k')
 
 	cmap = plt.get_cmap('jet')
 	low = cmap(0.5)
@@ -34,17 +58,17 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
 		else:
 			patches[i].set_facecolor(high)
 
-	plt.xlabel(xlabel, fontsize=16)  
-	plt.ylabel(ylabel, fontsize=16)
-	plt.xticks(fontsize=14)  
-	plt.yticks(fontsize=14)
-	ax = plt.subplot(111)  
+	ax.set_xlabel(xlabel, fontdict=font)  
+	ax.set_ylabel(ylabel, fontdict=font)
+	ax.set_xticklabels([],fontdict=font)  
+	ax.set_yticklabels([],fontdict=font)
+	#ax = plt.subplot(111)  
 	ax.spines["top"].set_visible(False)  
 	ax.spines["right"].set_visible(False)
 
 	#create legend
 	handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in [low,medium, high]]
-	labels= ["lowest %s bins "%(l,),"between %s and %s bins "%(l,h), "highesr %s bins"%(h,)]
-	plt.legend(handles, labels)
+	labels= ["lowest %s bins "%(l,),"between %s and %s bins "%(l,h), "highest %s bins"%(h,)]
+	ax.legend(handles, labels)
 
 	plt.show()
