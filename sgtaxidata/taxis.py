@@ -83,4 +83,7 @@ def get_df_all_taxi_data(dbname):
 	return df
 
 def get_dates(dbname):
-	return fetch_from_db(dbname,"select distinct date from taxis",())	
+	dates=fetch_from_db(dbname,"select distinct date from taxis",())
+	dates=[str(x[0]) for x in dates]
+	return dates
+

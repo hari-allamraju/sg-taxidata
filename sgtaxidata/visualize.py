@@ -18,7 +18,7 @@ def plot_model(X,y,model):
     plt.show()
 
 
-def plot_hist(d,xlabel,ylabel):
+def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences"):
 	N, bins, patches = plt.hist(d,100,ec='k')
 
 	cmap = plt.get_cmap('jet')
