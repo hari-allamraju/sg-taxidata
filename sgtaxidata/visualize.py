@@ -72,3 +72,9 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
 	ax.legend(handles, labels)
 
 	plt.show()
+
+def plot_map(df):
+	plt.rcParams['figure.figsize']=(20.0,10.0)
+	plt.rcParams['axes.facecolor'] = 'black'
+	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=.8,alpha=1)
+	plt.show()
