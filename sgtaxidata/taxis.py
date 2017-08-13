@@ -10,6 +10,23 @@ def file_to_grid(filename,grid_height=20):
 		grid[y][x]+=1
 	return grid
 
+def file_to_lat_lon_list(filename,grid_height=20):
+	grid=[]
+	data=read_json(filename)
+	for lon,lat in data['features'][0]['geometry']['coordinates']:
+		grid.append((lat,lon))
+	return grid
+
+def load_raw_taxi_data_to_db(dbname,directory,grid_height=20):
+	db=sqlite3.connect(dbname)
+	db.execute(TAXI_RAW_TABLE_CREATE_QUERY)
+	data=process_data(directory,TAXI_FILENAME,file_to_lat_lon_list,grid_height)
+	for date, time, points in data:
+		for lat,lon in points:
+			db.execute(TAXI_RAW_TABLE_INSERT_QUERY,(date,time,lat,lon))
+	db.commit()
+	db.close()
+
 def load_taxi_to_db(dbname,directory,grid_height=20):
 	db=sqlite3.connect(dbname)
 	db.execute(TAXI_TABLE_CREATE_QUERY)
@@ -50,6 +67,9 @@ def fetch_all_taxi_data_loc(dbname,lat,lon,grid_height=20):
 def fetch_all_taxi_data(dbname):
 	return fetch_from_db(dbname,ALL_TAXI,())
 
+def fetch_all_taxi_data_raw(dbname):
+	return fetch_from_db(dbname,ALL_TAXI_RAW,())
+
 def getdf_loc_time(dbname,time,lat,lon):
     data=fetch_loc_by_time(dbname,time,lat,lon)
     df=getdf(data,['Date','X','Y','TaxiCount'],'Point')
@@ -80,6 +100,11 @@ def get_df_all_taxi_data_loc(dbname,lat,lon):
 def get_df_all_taxi_data(dbname):
 	data=fetch_all_taxi_data(dbname)
 	df=getdf(data,['Date','Time','X','Y','TaxiCount'],'Point')
+	return df
+
+def get_df_all_taxi_data_raw(dbname):
+	data=fetch_all_taxi_data_raw(dbname)
+	df=getdf(data,['Date','Time','Lat','Lon'],'Point')
 	return df
 
 def get_dates(dbname):
