@@ -70,6 +70,9 @@ def fetch_all_taxi_data(dbname):
 def fetch_all_taxi_data_raw(dbname):
 	return fetch_from_db(dbname,ALL_TAXI_RAW,())
 
+def fetch_all_taxi_data_raw_date(dbname,date):
+	return fetch_from_db(dbname,ALL_TAXI_RAW_DATE,(date,))
+
 def getdf_loc_time(dbname,time,lat,lon):
     data=fetch_loc_by_time(dbname,time,lat,lon)
     df=getdf(data,['Date','X','Y','TaxiCount'],'Point')
@@ -104,6 +107,11 @@ def get_df_all_taxi_data(dbname):
 
 def get_df_all_taxi_data_raw(dbname):
 	data=fetch_all_taxi_data_raw(dbname)
+	df=getdf(data,['Date','Time','Lat','Lon'],'Point')
+	return df
+
+def get_df_all_taxi_data_raw_date(dbname,date):
+	data=fetch_all_taxi_data_raw_date(dbname,date)
 	df=getdf(data,['Date','Time','Lat','Lon'],'Point')
 	return df
 

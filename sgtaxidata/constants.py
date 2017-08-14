@@ -26,6 +26,7 @@ TAXI_BY_TIME_QUERY_XY='select date,x,y,value from taxis where time=? and x=? and
 ALL_TAXI_BY_XY='select date,time,x,y,value from taxis where x=? and y=?'
 ALL_TAXI='select date,time,x,y,value from taxis'
 ALL_TAXI_RAW='select date,time,lat,lon from taxis_raw'
+ALL_TAXI_RAW_DATE='select date,time,lat,lon from taxis_raw where date=?'
 #weather
 TWO_HOUR_TABLE_CREATE_QUERY='create table if not exists twohour (id INTEGER primary key autoincrement,date TEXT, time TEXT,x INTEGER, y INTEGER,forecast TEXT,location TEXT)'
 HEAVY_RAIN_TABLE_CREATE_QUERY='create table if not exists heavyrain (id INTEGER primary ket autoincrement,date TEXT, time TEXT, warning TEXT'
