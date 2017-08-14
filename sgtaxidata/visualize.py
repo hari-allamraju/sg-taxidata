@@ -8,6 +8,7 @@ font = {'family': 'Times New Roman',
         }
 
 def plot_data(data):
+	plt.rcParams['figure.figsize'] = (12.0,6.0)
 	fig=plt.figure()
 	ax=fig.add_subplot(111)
 	ax.grid()
@@ -60,9 +61,6 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
 
 	ax.set_xlabel(xlabel, fontdict=font)  
 	ax.set_ylabel(ylabel, fontdict=font)
-	ax.set_xticklabels([],fontdict=font)  
-	ax.set_yticklabels([],fontdict=font)
-	#ax = plt.subplot(111)  
 	ax.spines["top"].set_visible(False)  
 	ax.spines["right"].set_visible(False)
 
