@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+from constants import *
 
 font = {'family': 'Times New Roman',
         'color':  'darkred',
@@ -89,7 +90,7 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90,save
 def plot_map(df,size=0.5,save=False,filename="picture"):
 	plt.rcParams['figure.figsize']=(20.0,10.0)
 	plt.rcParams['axes.facecolor'] = 'black'
-	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1)
+	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1,xlim=[min_lon,max_lon],ylim=[min_lat,max_lat])
 	if save:
 		plt.savefig(filename)
 		plt.clf()
