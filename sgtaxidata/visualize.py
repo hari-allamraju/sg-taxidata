@@ -16,6 +16,8 @@ def plot_data(data,save=False,filename="picture"):
 		ax=plt.plot(x,y)
 	if save:
 		fig.savefig(filename)
+		fig.clear()
+		plt.close()
 	else:
 		plt.show()
 
@@ -42,6 +44,8 @@ def plot_model(X,y,model,save=False,filename="picture"):
 	ax1.legend(handles, labels)
 	if save:
 		fig.savefig(filename)
+		fig.clear()
+		plt.close()
 	else:
 		plt.show()
 
@@ -77,6 +81,8 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90,save
 
 	if save:
 		fig.savefig(filename)
+		fig.clear()
+		plt.close()
 	else:
 		plt.show()
 
@@ -86,5 +92,7 @@ def plot_map(df,size=0.5,save=False,filename="picture"):
 	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1)
 	if save:
 		plt.savefig(filename)
+		fig.clear()
+		plt.close()
 	else:
 		plt.show()
