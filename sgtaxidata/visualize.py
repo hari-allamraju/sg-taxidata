@@ -92,7 +92,8 @@ def plot_map(df,size=0.5,save=False,filename="picture"):
 	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1)
 	if save:
 		plt.savefig(filename)
-		plt.gcf().clear()
+		plt.clf()
+		plt.cla()
 		plt.close()
 	else:
 		plt.show()
