@@ -85,6 +85,6 @@ def plot_map(df,size=0.5,save=False,filename="picture"):
 	plt.rcParams['axes.facecolor'] = 'black'
 	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1)
 	if save:
-		fig.savefig(filename)
+		plt.savefig(filename)
 	else:
 		plt.show()
