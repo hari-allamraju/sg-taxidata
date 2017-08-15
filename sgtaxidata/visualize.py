@@ -7,16 +7,19 @@ font = {'family': 'Times New Roman',
         'size': 16,
         }
 
-def plot_data(data):
+def plot_data(data,save=False,filename="picture"):
 	plt.rcParams['figure.figsize'] = (12.0,6.0)
 	fig=plt.figure()
 	ax=fig.add_subplot(111)
 	ax.grid()
 	for x,y in data:
 		ax=plt.plot(x,y)
-	plt.show()
+	if save:
+		fig.savefig(filename)
+	else:
+		plt.show()
 
-def plot_model(X,y,model):
+def plot_model(X,y,model,save=False,filename="picture"):
 	plt.rcParams['figure.figsize'] = (12.0,12.0)
 	fig=plt.figure()
 	ax=fig.add_subplot(211)
@@ -37,10 +40,13 @@ def plot_model(X,y,model):
 	handles = [Rectangle((0,0),1,1,color=c,ec="k") for c in ['r']]
 	labels= ["Prediction Error"]
 	ax1.legend(handles, labels)
-	plt.show()
+	if save:
+		fig.savefig(filename)
+	else:
+		plt.show()
 
 
-def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
+def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90,save=False,filename="picture"):
 	plt.rcParams['figure.figsize'] = (12.0,6.0)
 	fig=plt.figure()
 	ax=fig.add_subplot(111)
@@ -69,10 +75,16 @@ def plot_hist(d,xlabel="Taxi Count",ylabel="Number of occurences",l=10,h=90):
 	labels= ["lowest %s bins "%(l,),"between %s and %s bins "%(l,h), "highest %s bins"%(h,)]
 	ax.legend(handles, labels)
 
-	plt.show()
+	if save:
+		fig.savefig(filename)
+	else:
+		plt.show()
 
-def plot_map(df,size=0.5):
+def plot_map(df,size=0.5,save=False,filename="picture"):
 	plt.rcParams['figure.figsize']=(20.0,10.0)
 	plt.rcParams['axes.facecolor'] = 'black'
 	df.plot(kind='scatter',x='Lon',y='Lat',color='white',s=size,alpha=1)
-	plt.show()
+	if save:
+		fig.savefig(filename)
+	else:
+		plt.show()
