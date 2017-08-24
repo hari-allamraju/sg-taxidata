@@ -105,3 +105,9 @@ def get_lat_long(location):
     if g.response.status_code == 200:
         c=g.geojson['features'][0]['geometry']['coordinates']
         return (c[1],c[0])
+
+def get_location(lat,lon):
+    g=geocoder.google([lat,lon],method='reverse')
+    if g.response.status_code == 200:
+        c=g.geojson['features'][0]['properties']['raw']['formatted_address']
+        return str(c)
