@@ -98,3 +98,17 @@ def plot_map(df,size=0.5,save=False,filename="picture"):
 		plt.close()
 	else:
 		plt.show()
+	plt.rcParams['axes.facecolor'] = 'white'
+	
+
+def plot_bubbles(x,y,s=None,c=None,save=False,filename="picture"):
+	plt.rcParams['figure.figsize']=(20.0,10.0)
+	plt.scatter(x, y, s=s, marker='o', c=c)
+	if save:
+		plt.savefig(filename)
+		plt.clf()
+		plt.cla()
+		plt.close()
+	else:
+		plt.show()
+	
