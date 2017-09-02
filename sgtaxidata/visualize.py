@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from constants import *
+import utils
+import numpy as np
 
 font = {'family': 'Times New Roman',
         'color':  'darkred',
@@ -101,9 +103,12 @@ def plot_map(df,size=0.5,save=False,filename="picture"):
 	plt.rcParams['axes.facecolor'] = 'white'
 	
 
-def plot_bubbles(x,y,s=None,c=None,save=False,filename="picture"):
+def plot_bubbles(x,y,s=None,save=False,filename="picture",h=20):
 	plt.rcParams['figure.figsize']=(20.0,10.0)
-	plt.scatter(x, y, s=s, marker='o', c=c)
+	cmap = plt.get_cmap('Paired')
+	clrs = cmap(np.linspace(0, 1, max(s)))
+	colors=[clrs[i-1] for i in s]
+	plt.scatter(x, y, s=s, marker='o', c=colors)
 	if save:
 		plt.savefig(filename)
 		plt.clf()
