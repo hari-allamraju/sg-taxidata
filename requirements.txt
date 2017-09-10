@@ -11,3 +11,4 @@ jupyter
 toree
 geocoder
 gmaps
+folium
